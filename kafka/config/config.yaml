@@ -1,0 +1,12 @@
+kafka:
+  timeout: 5s
+  producer:
+    server: "localhost:9001"
+    topic: "test"
+    key: "project"
+    value: "test"
+  consumer:
+    server: "localhost:9001"
+    topic: "test"
+    group_id: "test"
+    auto_offset_reset: "latest"

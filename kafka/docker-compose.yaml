@@ -1,0 +1,16 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper-brokers-check
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka--brokers-check
+    ports:
+      - "9001:9001"
+    environment:
+      KAFKA_CREATE_TOPICS: ":1:1"
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
