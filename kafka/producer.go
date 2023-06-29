@@ -12,49 +12,45 @@ func (b *Broker) ProducerStart() func(ctx context.Context) error {
 
 		b.logger.Info("Producer Topics", b.Conf.Kafka.Consumer.TopickName)
 
-		for {
+		for mes := range b.MesOut {
 			select {
 			case <-ctx.Done():
 				return nil
-			case mes := <-b.Mes:
-				err := b.sendMes(mes)
-				if err != nil {
-					b.logger.Error(err)
-				}
+			default:
+				b.Out(mes)
 			}
 		}
-
+		return nil
 	}
 }
 
-func (b *Broker) sendMes(msg []byte) error {
+func (b *Broker) Out(value []byte) {
 
 	event := make(chan kafka.Event)
 	defer close(event)
 
 	err := b.Producer.Produce(&kafka.Message{
 		TopicPartition: kafka.TopicPartition{Topic: &b.Conf.Kafka.Producer.TopickName, Partition: kafka.PartitionAny},
-		Value:          msg,
+		Value:          value,
 		Key:            []byte{},
 		Timestamp:      time.Time{},
 		TimestampType:  0,
 		Opaque:         nil,
-		Headers:        []kafka.Header{{Key: b.Conf.Kafka.Producer.Key, Value: []byte(b.Conf.Kafka.Producer.Value)}},
+		Headers:        []kafka.Header{},
 	}, event)
-
 	if err != nil {
-		return err
+		b.logger.Error("Send fail", err)
+		return
 	}
 
 	e := <-event
 	message := e.(*kafka.Message)
 
 	if message.TopicPartition.Error != nil {
-		return message.TopicPartition.Error
+		b.logger.Error("Send fail", message.TopicPartition.Error)
 	}
 
-	return nil
-
+	b.logger.Info("message delivered", message.TopicPartition) ///
 }
 
 func (b *Broker) ProducerStop() func(ctx context.Context) error {

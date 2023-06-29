@@ -7,10 +7,15 @@ services:
       - "2181:2181"
   kafka:
     image: wurstmeister/kafka
-    container_name: kafka--brokers-check
+    container_name: kafka-brokers-check
+    restart: always
+    depends_on:
+      - zookeeper
     ports:
-      - "9001:9001"
+      - "9092:9092"
     environment:
-      KAFKA_CREATE_TOPICS: ":1:1"
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_CREATE_TOPICS: "brokers-check:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_PORT: 9092
+      KAFKA_ADVERTISED_HOST_NAME: localhost

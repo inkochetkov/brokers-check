@@ -7,6 +7,12 @@ test-kafka:
 	docker-compose -f ./kafka/docker-compose.yaml up --remove-orphans -d
 	go test -v -tags=integration -count=1 ./kafka/...
 	docker-compose -f ./kafka/docker-compose.yaml down
+
+.PHONY: test-redis
+test-redis:
+	docker-compose -f ./redis/docker-compose.yaml up --remove-orphans -d
+	go test -v -tags=integration -count=1 ./redis/...
+	docker-compose -f ./redis/docker-compose.yaml down	
 	
 .PHONY: mod
 mod:

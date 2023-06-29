@@ -1,12 +1,11 @@
 kafka:
   timeout: 5s
+  buff: 1
   producer:
-    server: "localhost:9001"
-    topic: "test"
-    key: "project"
-    value: "test"
+    server: "127.0.0.1:9092"
+    topic: "brokers-check"
   consumer:
-    server: "localhost:9001"
-    topic: "test"
-    group_id: "test"
+    server: "127.0.0.1:9092"
+    topic: "brokers-check"
+    group_id: "brokers-check"
     auto_offset_reset: "latest"

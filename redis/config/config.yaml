@@ -1,0 +1,5 @@
+redis:
+  timeout: 5s
+  server: "redis://@127.0.0.1:6379"
+  topic: "test"
+  buff: 2
