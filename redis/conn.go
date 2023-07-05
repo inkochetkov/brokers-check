@@ -14,6 +14,7 @@ type Config struct {
 		Server  string        `yaml:"server"`
 		Queue   string        `yaml:"queue"`
 		Buff    int           `yaml:"buff"`
+		Key     string        `yaml:"key"`
 	} `yaml:"redis"`
 }
 
