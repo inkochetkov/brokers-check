@@ -11,9 +11,10 @@ import (
 // Config Broker Kafka
 type Config struct {
 	Kafka struct {
-		Timeout  time.Duration `yaml:"timeout"`
-		Buff     int           `yaml:"buff"`
-		Producer struct {
+		Timeout   time.Duration `yaml:"timeout"`
+		TimeoutMS int           `yaml:"timeout_ms"`
+		Buff      int           `yaml:"buff"`
+		Producer  struct {
 			Server     string `yaml:"server"`
 			TopickName string `yaml:"topic"`
 			Key        string `yaml:"key"`

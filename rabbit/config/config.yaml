@@ -1,0 +1,17 @@
+rabbit:
+  timeout: 5s
+  timeout_reconnect: 10m
+  buff: 1
+  producer:
+    server: "amqp://rabbit:test@127.0.0.1:15672"
+    queue: "brokers-check"
+    exchange: "brokers-check"
+    exchange_type: "topic"
+    content_type: "text/plain"
+    key: "brokers-check"
+  consumer:
+    server: "amqp://rabbit:test@127.0.0.1:15672"
+    queue: "brokers-check"
+    exchange: "brokers-check"
+
+    auto_offset_reset: "latest"

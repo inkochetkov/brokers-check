@@ -1,5 +1,6 @@
 kafka:
   timeout: 5s
+  timeout_ms: 10000
   buff: 1
   producer:
     server: "127.0.0.1:9092"

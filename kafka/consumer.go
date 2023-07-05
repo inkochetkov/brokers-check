@@ -46,7 +46,7 @@ func (b *Broker) ConsumerStop() func(ctx context.Context) error {
 // Read topic
 func (b *Broker) In() []byte {
 
-	event := b.Consumer.Poll(200000000000)
+	event := b.Consumer.Poll(b.Conf.Kafka.TimeoutMS)
 	if event == nil {
 		b.logger.Error("event  nil") ///
 		return nil

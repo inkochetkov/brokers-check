@@ -8,6 +8,7 @@ require (
 	github.com/inkochetkov/config v0.0.2
 	github.com/inkochetkov/gs v0.0.0-20230607154931-39bc34bf5858
 	github.com/inkochetkov/log v0.0.3
+	github.com/rabbitmq/amqp091-go v1.8.1
 	github.com/stretchr/testify v1.8.2
 )
 

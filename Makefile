@@ -13,6 +13,12 @@ test-redis:
 	docker-compose -f ./redis/docker-compose.yaml up --remove-orphans -d
 	go test -v -tags=integration -count=1 ./redis/...
 	docker-compose -f ./redis/docker-compose.yaml down	
+
+.PHONY: test-rabbit
+test-rabbit:
+	docker-compose -f ./rabbit/docker-compose.yaml up --remove-orphans -d
+	go test -v -tags=integration -count=1 ./rabbit/...
+	docker-compose -f ./rabbit/docker-compose.yaml down		
 	
 .PHONY: mod
 mod:

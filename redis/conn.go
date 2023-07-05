@@ -7,10 +7,6 @@ import (
 	"github.com/inkochetkov/log"
 )
 
-const (
-	empty = ""
-)
-
 // Config Broker Redis
 type Config struct {
 	Redis struct {
